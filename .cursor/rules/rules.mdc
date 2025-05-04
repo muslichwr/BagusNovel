@@ -1,0 +1,239 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Cursor AI Configuration Rules for Novel Reading Web Application
+
+## Project Scope: Japanese-Style Novel Reading Platform
+
+### Development Environment Specifications
+
+#### Core Technologies
+- **PHP 8.4**: Leverage latest language features including Constructor Property Promotion, Union Types, and First-class Callable Syntax
+- **HTML5**: Implement semantic markup with advanced Canvas and SVG for interactive elements
+- **PostgreSQL**: Utilize JSON capabilities and full-text search optimized for literary content
+
+#### IDE Configuration
+1. **Syntax Recognition**
+   - Enable PHP 8.4 syntax highlighting with attribute recognition
+   - Configure HTML5 validation against W3C standards
+   - Setup SQL linting for PostgreSQL-specific syntax
+
+2. **Code Completion**
+   - Prioritize suggestions for PHP 8.4 named arguments and attributes
+   - Provide contextual completion for HTML5 responsive elements
+   - Generate PostgreSQL-optimized query templates for text retrieval operations
+
+3. **Error Detection**
+   - Flag potential PHP 8.4 deprecated features
+   - Identify accessibility issues in HTML5 structure
+   - Warn about non-indexed PostgreSQL queries for large text blocks
+
+### Architectural Guidance
+
+#### Database Schema Principles
+- Design normalized tables for novels, chapters, user bookmarks, and reading progress
+- Implement hierarchical categorization for genres using PostgreSQL recursive queries
+- Structure text storage with consideration for efficient partial retrieval patterns
+
+```sql
+CREATE TABLE novels (
+    novel_id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    cover_image_path VARCHAR(255),
+    synopsis TEXT,
+    publication_date DATE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    metadata JSONB
+);
+
+CREATE TABLE chapters (
+    chapter_id SERIAL PRIMARY KEY,
+    novel_id INTEGER REFERENCES novels(novel_id),
+    chapter_number INTEGER NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    word_count INTEGER,
+    reading_time_minutes INTEGER,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT unique_chapter_per_novel UNIQUE(novel_id, chapter_number)
+);
+
+CREATE INDEX idx_novel_search ON novels USING gin(to_tsvector('english', title || ' ' || synopsis));
+CREATE INDEX idx_chapter_content ON chapters USING gin(to_tsvector('english', content));
+```
+
+#### Backend Architecture
+- Implement MVC pattern with separation of database operations into repository classes
+- Design service layer for business logic related to reading progress tracking
+- Create clean API endpoints for frontend consumption with proper documentation
+
+```php
+<?php
+// Example of PHP 8.4 repository class structure
+namespace App\Repositories;
+
+class NovelRepository
+{
+    public function __construct(
+        private \PDO $db,
+        private readonly string $cacheKey = 'novels',
+    ) {}
+    
+    public function findByGenre(string $genre, int $limit = 10): array|false 
+    {
+        $stmt = $this->db->prepare(
+            "SELECT n.* FROM novels n 
+             JOIN novel_genres ng ON n.novel_id = ng.novel_id 
+             JOIN genres g ON ng.genre_id = g.genre_id 
+             WHERE g.name = :genre
+             ORDER BY n.created_at DESC
+             LIMIT :limit"
+        );
+        
+        $stmt->bindParam(':genre', $genre);
+        $stmt->bindParam(':limit', $limit, \PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+    public function getRecommendedNovels(int $userId): array
+    {
+        // Implementation using PostgreSQL's recommendation algorithms
+    }
+}
+```
+
+#### Frontend Implementation
+- Create responsive layouts optimized for various reading devices and orientations
+- Design Japanese-inspired UI elements with attention to typography and whitespace
+- Implement progressive loading for chapter content to optimize reading experience
+
+```html
+<!-- Example HTML5 structure with Japanese styling influences -->
+<article class="novel-reader" data-chapter-id="42">
+  <header class="novel-header">
+    <h1 class="novel-title">桜の木の下で</h1>
+    <div class="chapter-navigation">
+      <button class="nav-button prev" aria-label="Previous Chapter">◀</button>
+      <span class="chapter-indicator">Chapter 3: 新たな始まり</span>
+      <button class="nav-button next" aria-label="Next Chapter">▶</button>
+    </div>
+  </header>
+  
+  <section class="reading-progress">
+    <div class="progress-bar" style="width: 45%"></div>
+    <span class="progress-text">45% · 12 min remaining</span>
+  </section>
+  
+  <main class="chapter-content vertical-writing">
+    <p>物語の本文がここに表示されます。日本語のような縦書きレイアウトでテキストが表示されます。</p>
+    <!-- Progressive loading of additional paragraphs -->
+  </main>
+  
+  <footer class="reading-controls">
+    <button class="font-size-control decrease">A-</button>
+    <button class="font-size-control increase">A+</button>
+    <button class="theme-toggle" aria-label="Toggle Dark Mode">☽</button>
+    <button class="bookmark" aria-label="Bookmark">⚑</button>
+  </footer>
+</article>
+```
+
+### Japanese Convoluted Style Implementation Guidelines
+
+#### Visual Design Principles
+1. **Wabi-Sabi Aesthetics**
+   - Embrace imperfection and asymmetry in layout design
+   - Use subtle texture backgrounds reminiscent of traditional washi paper
+   - Implement fade transitions that mimic the turning of physical pages
+
+2. **Typography Considerations**
+   - Support vertical text layout (縦書き) option for authentic Japanese reading experience
+   - Implement proper line breaking rules (禁則処理) for mixed language content
+   - Select appropriate font pairings that honor both Latin and Japanese character aesthetics
+
+3. **Color Philosophy**
+   - Derive color palette from traditional Japanese seasons (四季)
+   - Implement theme switching based on novel genre or user preference
+   - Use color psychology principles aligned with Japanese cultural context
+
+#### Interactive Elements
+1. **Page Transitions**
+   - Implement subtle paper-folding animations for chapter transitions
+   - Create interactive page corners that respond to hover/touch
+   - Design custom scrollbar that resembles traditional scroll handles
+
+2. **Reading Experience**
+   - Support both horizontal and vertical reading modes with seamless switching
+   - Implement customizable reading backgrounds (paper types, ambient lighting)
+   - Create floating furigana for difficult kanji with hover explanations
+
+### Code Quality Standards
+
+#### PHP Development Rules
+1. **Structured Error Handling**
+   - Utilize PHP 8.4's improved exception hierarchy
+   - Implement proper logging with contextual information
+   - Design user-friendly error messages in keeping with Japanese UI aesthetics
+
+2. **Performance Optimization**
+   - Implement opcache preloading for core application classes
+   - Structure database queries with pagination for large novel content
+   - Utilize PostgreSQL prepared statements for all database operations
+
+3. **Security Measures**
+   - Implement CSRF protection on all forms
+   - Sanitize user inputs with context-aware escaping
+   - Apply proper content security policies for media content
+
+#### Database Optimization Rules
+1. **Query Performance**
+   - Create specialized indexes for full-text search operations
+   - Implement materialized views for commonly accessed novel metadata
+   - Design efficient query patterns for reading progress tracking
+
+2. **Data Integrity**
+   - Establish comprehensive constraint system for relational data
+   - Implement proper transaction handling for multi-step operations
+   - Design audit trails for content modifications
+
+### Testing Requirements
+
+1. **Unit Testing**
+   - Achieve minimum 85% code coverage for all PHP classes
+   - Create specialized tests for text rendering edge cases
+   - Implement database fixtures for reproducible test scenarios
+
+2. **UI Testing**
+   - Test responsive layout across various device dimensions
+   - Verify proper rendering of Japanese and multilingual content
+   - Validate reading experience across different browsers and platforms
+
+3. **Performance Testing**
+   - Benchmark page load times for various chapter lengths
+   - Test concurrent user scenarios for shared database resources
+   - Validate CDN integration for media content delivery
+
+### Deployment Workflow
+
+1. **Development Environment**
+   - Configure local development with Docker containerization
+   - Implement database seeding with realistic novel content
+   - Setup automated linting and formatting on commit
+
+2. **Staging Process**
+   - Deploy to staging environment with anonymized production data
+   - Implement comprehensive smoke tests before production promotion
+   - Perform structured QA review with focus on reading experience
+
+3. **Production Safeguards**
+   - Configure rolling deployments to minimize disruption
+   - Implement automated backup strategy for user reading progress
+
+   - Design monitoring dashboards for critical application metrics
