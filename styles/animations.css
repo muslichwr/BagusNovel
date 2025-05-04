@@ -1,0 +1,229 @@
+/**
+ * Novel Reader Animations CSS
+ * CSS untuk animasi dan efek dalam aplikasi baca novel
+ */
+
+/* Animasi Transisi Halaman */
+.page-transition-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.page-transition-out {
+    animation: fadeOut 0.5s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Efek Fade In Saat Scroll */
+.fade-in-element {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-element.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Efek Hover */
+.btn, .card, .novel-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+.btn.hover, .card.hover, .novel-item.hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    filter: brightness(1.05);
+}
+
+/* Efek Hover Pada Cover Novel */
+.novel-cover {
+    transition: transform 0.5s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.novel-cover.tilt {
+    transform: rotateY(10deg) rotateX(5deg);
+    box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Efek Latar Belakang Washi */
+.washi-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/washi.jpg'); /* Gambar tekstur kertas washi */
+    background-size: cover;
+    opacity: 0.1;
+    pointer-events: none;
+    transition: transform 0.2s ease-out;
+    z-index: -1;
+}
+
+/* Tema Berdasarkan Waktu */
+body[data-time-theme="morning"] {
+    --theme-bg-color: #f8e8d4;
+    --theme-text-color: #5b4636;
+    --theme-accent-color: #e79e4f;
+}
+
+body[data-time-theme="day"] {
+    --theme-bg-color: #f5f5f0;
+    --theme-text-color: #333333;
+    --theme-accent-color: #4a90e2;
+}
+
+body[data-time-theme="evening"] {
+    --theme-bg-color: #e8d0b9;
+    --theme-text-color: #4a3e30;
+    --theme-accent-color: #dc7633;
+}
+
+body[data-time-theme="night"] {
+    --theme-bg-color: #2c3e50;
+    --theme-text-color: #ecf0f1;
+    --theme-accent-color: #8e44ad;
+}
+
+/* Sakura Effect */
+#sakura-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.sakura-petal {
+    position: absolute;
+    background-image: url('../images/sakura-petal.png'); /* Gambar kelopak sakura */
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    animation-name: fallingSakura;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+}
+
+@keyframes fallingSakura {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateX(100px) translateY(100px) rotate(90deg);
+    }
+    50% {
+        transform: translateX(-20px) translateY(200px) rotate(180deg);
+    }
+    75% {
+        transform: translateX(50px) translateY(300px) rotate(270deg);
+    }
+    100% {
+        transform: translateX(-30px) translateY(100vh) rotate(360deg);
+    }
+}
+
+/* Efek Lipatan Kertas */
+.page-fold-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f5f1e8;
+    z-index: 9999;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform-origin: top right;
+    transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.page-fold-effect.folding {
+    clip-path: polygon(0 0, 100% 0, 0 0, 0 100%);
+}
+
+/* Efek Toast Notification */
+#toast-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: rgba(51, 51, 51, 0.9);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 20px;
+    font-size: 14px;
+    z-index: 10000;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#toast-notification.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* Efek Vertikal Writing */
+.vertical-writing {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    height: 80vh;
+    overflow-x: auto;
+    padding: 20px;
+    margin: 0 auto;
+    background-color: rgba(248, 240, 227, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+/* Animasi Loading */
+.loading-circle {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    margin: 30px auto;
+}
+
+.loading-circle:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: var(--theme-accent-color, #4a90e2);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Animasi Pulsa */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+} 

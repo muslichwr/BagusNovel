@@ -1,0 +1,49 @@
+# Atur baris akhir secara otomatis untuk file teks
+* text=auto
+
+# File teks yang spesifik perlu pengaturan line ending secara eksplisit
+*.php text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+*.xml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sql text eol=lf
+*.svg text eol=lf
+
+# Pengaturan untuk file binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.mp4 binary
+*.webm binary
+*.mp3 binary
+*.zip binary
+*.pdf binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
+*.eot binary
+*.otf binary
+
+# File yang tidak boleh dinormalisasi dalam perbandingan diff
+*.md diff
+*.php diff
+*.css diff
+*.js diff
+*.sql diff
+
+# Abaikan file-file berikut dalam statistik repositori
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/README.md export-ignore
+/CHANGELOG.md export-ignore
+/CONTRIBUTING.md export-ignore
+/.editorconfig export-ignore 

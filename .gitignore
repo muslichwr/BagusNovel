@@ -1,0 +1,84 @@
+# Abaikan file sistem operasi
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Abaikan direktori dan file dependensi
+/vendor/
+/node_modules/
+composer.lock
+package-lock.json
+yarn.lock
+
+# Abaikan file konfigurasi lingkungan
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Abaikan file konfigurasi IDE dan editor
+/.idea/
+/.vscode/
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+.komodotools
+.project
+.buildpath
+.settings/
+
+# Abaikan file cache
+*.log
+*.cache
+*.tmp
+.sass-cache/
+*.swp
+*.swo
+
+# Abaikan file backup
+*~
+*.bak
+*.orig
+
+# Abaikan file upload
+/uploads/*
+!/uploads/.gitkeep
+
+# Abaikan file kompilasi
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Abaikan file backup Laragon/server lokal
+/cgi-bin/
+.htaccess.bak
+php.ini.bak
+*.php.bak
+
+# Abaikan direktori cache dan log aplikasi
+/app/cache/*
+/app/logs/*
+!/app/cache/.gitkeep
+!/app/logs/.gitkeep
+/var/cache/*
+/var/log/*
+!/var/cache/.gitkeep
+!/var/log/.gitkeep
+
+# Abaikan file generasi gambar
+*.jpg.webp
+*.png.webp
+*.jpeg.webp
+*.gif.webp
+
+# Abaikan file sementara dan cadangan
+index.php.backup
+*.backup
+*.zip
+*.tar
+*.tar.gz
+*.rar 

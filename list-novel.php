@@ -218,7 +218,10 @@ $currentPageNovels = array_slice($novels, ($page - 1) * $perPage, $perPage);
     <title><?php echo $pageTitle; ?></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="BagusNovel - Platform Baca Novel Online Terlengkap dengan berbagai genre dan penulis terkenal">
     <link rel="stylesheet" href="styles/css.css">
+    <link rel="stylesheet" href="styles/animations.css">
     <!-- Font Awesome untuk icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
