@@ -1,0 +1,215 @@
+/**
+ * CSS Khusus untuk Filter pada List Novel
+ * File ini berisi styling untuk filter-container dan komponen filter
+ */
+
+/* Main Filter Container */
+.filter-container {
+    background-color: var(--color-section-bg);
+    border: 1px solid var(--color-section-border);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Header Filter */
+.filter-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-section-border);
+}
+
+.filter-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-text);
+}
+
+.filter-count {
+    font-size: 12px;
+    color: var(--color-secondary-text);
+    background-color: var(--color-box-bg);
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+/* Opsi Sortir dan Tampilan */
+.filter-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.filter-sort {
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+}
+
+.sort-select {
+    margin-left: 5px;
+    padding: 3px;
+    font-size: 11px;
+    border: 1px solid var(--color-input-border);
+    border-radius: 2px;
+    background-color: var(--color-input-bg);
+    color: var(--color-input-text);
+}
+
+.view-toggles {
+    display: flex;
+}
+
+.view-toggle-btn {
+    background: none;
+    border: 1px solid var(--color-section-border);
+    font-size: 14px;
+    padding: 4px 8px;
+    cursor: pointer;
+    color: var(--color-secondary-text);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.view-toggle-btn:first-child {
+    border-radius: 3px 0 0 3px;
+}
+
+.view-toggle-btn:last-child {
+    border-radius: 0 3px 3px 0;
+}
+
+.view-toggle-btn.active {
+    background-color: var(--color-active-bg);
+    color: white;
+    border-color: var(--color-active-bg);
+}
+
+/* Advanced Filter Section */
+.advanced-filter-options {
+    background-color: var(--color-section-bg);
+    border-radius: 5px;
+    padding: 15px;
+    border: 1px solid var(--color-section-border);
+    margin-top: 15px;
+    display: block;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden; /* Mencegah margin collapse */
+    position: relative; /* Memberikan konteks posisi */
+}
+
+/* Tambahkan clearfix untuk handling konten floating */
+.advanced-filter-options::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Dark Mode Adjustments */
+.dark-mode .advanced-filter-options {
+    background-color: var(--color-section-bg);
+    border-color: var(--color-section-border);
+}
+
+/* Filter Form Elements */
+.filter-form {
+    font-size: 11px;
+    width: 100%;
+    display: block;
+}
+
+.filter-group {
+    margin-bottom: 12px;
+    display: block;
+    width: 100%;
+}
+
+.filter-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: var(--color-text);
+}
+
+.dark-mode .filter-label {
+    color: var(--color-text);
+}
+
+.filter-options-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.filter-option {
+    font-size: 13px;
+    color: var(--color-text);
+    margin-right: 15px;
+}
+
+.dark-mode .filter-option {
+    color: var(--color-text);
+}
+
+.filter-form input[type="radio"] {
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.filter-submit {
+    margin-top: 15px;
+    width: 100%;
+    display: block;
+}
+
+.filter-button {
+    width: 100%;
+    background: var(--color-button-bg);
+    color: var(--color-button-text);
+    border: none;
+    padding: 8px 12px;
+    font-size: 13px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.filter-button:hover {
+    background: #e55c00;
+}
+
+/* Empty Result Styling */
+.empty-result {
+    background-color: var(--color-section-bg);
+    border: 1px solid var(--color-section-border);
+    border-radius: 2px;
+    padding: 15px;
+    text-align: center;
+    font-size: 12px;
+}
+
+/* Responsif untuk filter */
+@media (max-width: 768px) {
+    .filter-options {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .view-toggles {
+        margin-top: 10px;
+    }
+    
+    .filter-options-group {
+        flex-direction: column;
+        gap: 5px;
+    }
+} 

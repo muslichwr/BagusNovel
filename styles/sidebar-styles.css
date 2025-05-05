@@ -1,0 +1,293 @@
+/**
+ * CSS Khusus untuk Sidebar BagusNovel
+ * File ini berisi styling untuk komponen sidebar
+ */
+
+/* Sidebar Container */
+.main-container .sidebar {
+    width: 200px;
+    flex-shrink: 0;
+}
+
+/* Sidebar Section */
+.main-container .sidebar-section {
+    background-color: var(--color-section-bg);
+    border: 1px solid var(--color-section-border);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.main-container .sidebar-header {
+    background-color: var(--color-title-bg);
+    color: var(--color-title-text);
+    padding: 4px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    display: block;
+}
+
+.main-container .sidebar-content {
+    padding: 6px;
+    font-size: 11px;
+    display: block;
+}
+
+/* Novel Tersimpan */
+.main-container .sidebar .saved-novels {
+    padding: 0 5px;
+    display: block;
+}
+
+.main-container .sidebar .saved-novel-item {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-box-border);
+    display: block;
+}
+
+.main-container .sidebar .saved-novel-item:last-child {
+    border-bottom: none;
+}
+
+.main-container .sidebar .saved-novel-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-link);
+    text-decoration: none;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.main-container .sidebar .saved-novel-title:hover {
+    color: var(--color-link-hover);
+}
+
+.main-container .sidebar .view-all-saved, 
+.main-container .sidebar .view-all-history {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.main-container .sidebar .view-all-link {
+    font-size: 11px;
+    color: var(--color-link);
+    text-decoration: none;
+}
+
+.main-container .sidebar .view-all-link:hover {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+}
+
+.main-container .sidebar .empty-saved, 
+.main-container .sidebar .empty-history {
+    text-align: center;
+    padding: 10px;
+    font-size: 11px;
+    color: var(--color-secondary-text);
+}
+
+/* Riwayat Bacaan */
+.main-container .sidebar .reading-history {
+    padding: 0 5px;
+    display: block;
+}
+
+.main-container .sidebar .history-item {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-box-border);
+    display: block;
+}
+
+.main-container .sidebar .history-item:last-child {
+    border-bottom: none;
+}
+
+.main-container .sidebar .history-novel-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-link);
+    text-decoration: none;
+    display: block;
+    line-height: 1.3;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.main-container .sidebar .history-novel-title:hover {
+    color: var(--color-link-hover);
+}
+
+.main-container .sidebar .history-chapter {
+    font-size: 10px;
+    color: var(--color-link);
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.main-container .sidebar .history-chapter:hover {
+    color: var(--color-link-hover);
+}
+
+.main-container .sidebar .history-date {
+    font-size: 9px;
+    color: var(--color-secondary-text);
+    display: block;
+    margin-top: 3px;
+}
+
+/* Peringkat Popularitas */
+.main-container .sidebar .ranking-item {
+    padding: 4px 0;
+    border-bottom: 1px solid var(--color-box-border);
+    display: block;
+    overflow: hidden;
+}
+
+.main-container .sidebar .ranking-item:last-child {
+    border-bottom: none;
+}
+
+.main-container .sidebar .ranking-number {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: #999;
+    color: #fff;
+    text-align: center;
+    line-height: 16px;
+    font-size: 10px;
+    border-radius: 50%;
+    margin-right: 4px;
+    float: left;
+}
+
+.main-container .sidebar .ranking-number-1 {
+    background-color: #ff6600;
+}
+
+.main-container .sidebar .ranking-number-2 {
+    background-color: #ff9900;
+}
+
+.main-container .sidebar .ranking-number-3 {
+    background-color: #ffcc00;
+}
+
+.main-container .sidebar .ranking-title {
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--color-link);
+    display: block;
+    margin-left: 22px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.main-container .sidebar .ranking-title:hover {
+    color: var(--color-link-hover);
+}
+
+/* Category Sidebar */
+.main-container .sidebar .category-sidebar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main-container .sidebar .category-sidebar-item {
+    border-bottom: 1px solid var(--color-box-border);
+}
+
+.main-container .sidebar .category-sidebar-item:last-child {
+    border-bottom: none;
+}
+
+.main-container .sidebar .category-sidebar-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    color: var(--color-link);
+    text-decoration: none;
+    font-size: 11px;
+}
+
+.main-container .sidebar .category-sidebar-link:hover {
+    color: var(--color-link-hover);
+}
+
+.main-container .sidebar .category-sidebar-link.active {
+    color: var(--color-link-hover);
+    font-weight: 700;
+}
+
+.main-container .sidebar .category-name {
+    display: block;
+}
+
+.main-container .sidebar .category-count {
+    display: inline-block;
+    padding: 2px 5px;
+    background-color: #f0f0f0;
+    color: #666;
+    border-radius: 10px;
+    font-size: 10px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.main-container .sidebar .category-sidebar-link:hover .category-count,
+.main-container .sidebar .category-sidebar-link.active .category-count {
+    background-color: var(--color-button-bg);
+    color: #fff;
+}
+
+/* Dark Mode */
+.dark-mode .main-container .sidebar-section {
+    background-color: var(--color-section-bg);
+    border-color: var(--color-section-border);
+}
+
+.dark-mode .main-container .sidebar-header {
+    background-color: var(--color-title-bg);
+    color: var(--color-title-text);
+}
+
+.dark-mode .main-container .sidebar .saved-novel-item,
+.dark-mode .main-container .sidebar .history-item,
+.dark-mode .main-container .sidebar .ranking-item,
+.dark-mode .main-container .sidebar .category-sidebar-item {
+    border-bottom-color: var(--color-box-border);
+}
+
+.dark-mode .main-container .sidebar .saved-novel-title,
+.dark-mode .main-container .sidebar .history-novel-title,
+.dark-mode .main-container .sidebar .history-chapter,
+.dark-mode .main-container .sidebar .ranking-title,
+.dark-mode .main-container .sidebar .category-sidebar-link {
+    color: var(--color-link);
+}
+
+.dark-mode .main-container .sidebar .saved-novel-title:hover,
+.dark-mode .main-container .sidebar .history-novel-title:hover,
+.dark-mode .main-container .sidebar .history-chapter:hover,
+.dark-mode .main-container .sidebar .ranking-title:hover,
+.dark-mode .main-container .sidebar .category-sidebar-link:hover,
+.dark-mode .main-container .sidebar .category-sidebar-link.active {
+    color: var(--color-link-hover);
+}
+
+.dark-mode .main-container .sidebar .empty-saved,
+.dark-mode .main-container .sidebar .empty-history,
+.dark-mode .main-container .sidebar .history-date {
+    color: var(--color-secondary-text);
+} 

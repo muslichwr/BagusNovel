@@ -7,333 +7,163 @@
 $pageTitle = "BagusNovel | Baca Novel Online Terlengkap";
 $currentPage = "home";
 
-// Variabel untuk konten dinamis
-$featuredNovels = [
-    [
-        "id" => 1,
-        "title" => "Saat Bereinkarnasi ke Dunia Lain dan Menjadi Penyihir Terkuat",
-        "cover" => "images/covers/cover1.jpg",
-        "description" => "Cerita tentang karakter utama yang dipecat dari perusahaannya, kemudian mengalami kecelakaan dan bereinkarnasi ke dunia lain. Ia menemukan bakat sihirnya dan berpetualang bersama Guild Petualang.",
-        "price" => 1600,
-        "oldPrice" => 2200,
-        "discount" => 27
-    ],
-    [
-        "id" => 2,
-        "title" => "Kisahku Menjadi Petualang di Dunia Pedang dan Sihir",
-        "cover" => "images/covers/cover2.jpg",
-        "description" => "Petualangan seorang remaja biasa yang tiba-tiba dipanggil ke dunia lain dan harus belajar bertahan hidup dengan kekuatan baru.",
-        "price" => 1600,
-        "oldPrice" => 2200,
-        "discount" => 27
-    ],
-    [
-        "id" => 3,
-        "title" => "Gadis Berkekuatan Super di Kota Akademi",
-        "cover" => "images/covers/cover3.jpg",
-        "description" => "Kisah seorang gadis dengan kekuatan tersembunyi yang bersekolah di akademi khusus dan menghadapi berbagai petualangan.",
-        "price" => 1400,
-        "oldPrice" => 1800,
-        "discount" => 22
-    ]
-];
+// Include file konfigurasi
+require_once('includes/config.php');
 
-$newReleases = [
-    [
-        "id" => 4,
-        "title" => "Kisah Saat Bereinkarnasi Menjadi Penduduk Desa",
-        "author" => "Sato Taro",
-        "cover" => "images/covers/cover4.jpg",
-        "description" => "Karakter utama yang dulunya seorang karyawan kantoran biasa meninggal karena kecelakaan dan bereinkarnasi sebagai penduduk desa di dunia lain. Ini adalah kisah tentang bagaimana ia mengembangkan desa dengan teknologi pertanian.",
-        "views" => 3240,
-        "likes" => 421,
-        "comments" => 56,
-        "price" => 1200,
-        "isNew" => true
-    ],
-    [
-        "id" => 5,
-        "title" => "Kehidupan Tinggal Bersama yang Aneh dengan Hantu",
-        "author" => "Yamada Hanako",
-        "cover" => "images/covers/cover5.jpg",
-        "description" => "Di rumah baru yang ia pindahi, ternyata tinggal seorang hantu gadis cantik namun agak ceroboh. Cerita misteri remaja yang mengungkap rahasia kematian sang gadis.",
-        "views" => 5129,
-        "likes" => 892,
-        "comments" => 137,
-        "price" => 1500,
-        "isHot" => true
-    ]
-];
+// Include file data
+require_once('includes/data.php');
 
-$categories = [
-    ["name" => "Fantasi", "count" => 235, "image" => "images/categories/fantasy.jpg"],
-    ["name" => "Fiksi Ilmiah", "count" => 121, "image" => "images/categories/scifi.jpg"],
-    ["name" => "Romantis", "count" => 186, "image" => "images/categories/romance.jpg"],
-    ["name" => "Horor", "count" => 98, "image" => "images/categories/horror.jpg"]
-];
+// Atur opsi sidebar
+$showSidebar = true;
+$showSavedNovels = true;
+$showReadingHistory = true;
+$showCategories = true;
 
-$popularRankings = [
-    ["id" => 6, "title" => "Penyihir yang Menjalani Kehidupan Santai di Dunia Lain"],
-    ["id" => 7, "title" => "Ternyata Pendekar Pedang Terkuat Adalah Seorang Gadis"],
-    ["id" => 8, "title" => "Berhenti Kerja dan Bergabung dengan Guild Petualang"],
-    ["id" => 9, "title" => "Gadis Penyihir yang Beraksi di Balik Layar Kota Akademi"],
-    ["id" => 10, "title" => "Murid Terhebat dari Sekolah Sihir yang Terlupakan"]
-];
+// Include header
+require_once('includes/header.php');
 ?>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <title><?php echo $pageTitle; ?></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="BagusNovel - Platform Baca Novel Online Terlengkap dengan berbagai genre dan penulis terkenal">
-    <link rel="stylesheet" href="styles/css.css">
-    <link rel="stylesheet" href="styles/animations.css">
-    <!-- Font Awesome untuk icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</head>
-<body>
-    <!-- Header -->
-    <div class="header-top-bar">
-        <div class="header-top-container">
-            <div class="header-top-left">
-                <span><?php echo date("Y年m月d日"); ?> | BagusNovel - Platform Baca Novel Online Terlengkap</span>
-            </div>
-            <ul class="header-nav">
-                <li><a href="login.php">Login</a></li>
-                <li><a href="register.php">Register</a></li>
-            </ul>
-        </div>
-    </div>
-    
-    <div class="main-header">
-        <div class="header-container">
-            <div class="logo-container">
-                <a href="index.php" class="logo">
-                    <img src="images/logo.png" alt="BagusNovel">
-                    <span>BagusNovel</span>
-                </a>
-            </div>
-            
-            <div class="header-search">
-                <form action="list-novel.php" method="get" class="search-form">
-                    <input type="text" name="search" placeholder="Cari judul novel, penulis..." class="search-input">
-                    <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-                </form>
-            </div>
-            
-            <div class="user-actions">
-                <a href="login.php" class="action-button">Login</a>
-                <a href="register.php" class="action-button orange">Daftar</a>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <a href="index.php" class="nav-tab active">Beranda</a>
-            <a href="list-novel.php" class="nav-tab">Daftar Novel</a>
-            <a href="list-novel.php?category=popular" class="nav-tab">Novel Populer</a>
-            <a href="list-novel.php?category=new" class="nav-tab">Rilis Terbaru</a>
-            <a href="list-novel.php?free=1" class="nav-tab">Baca Gratis</a>
-        </div>
-    </nav>
-    
-    <!-- Main Container -->
-    <div class="main-container">
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Hero Banner -->
-            <div class="slider-banner">
-                <img src="images/banner.jpg" alt="Banner Promosi Novel Terbaru">
-            </div>
-            
-            <!-- Karya Unggulan -->
-            <section class="feature-section">
-                <div class="feature-header">
-                    <h2 class="feature-title"><i class="fas fa-star"></i> Karya Unggulan Minggu Ini</h2>
-                    <a href="list-novel.php?featured=1" class="feature-more">Lihat Semua</a>
-                </div>
-                
-                <div class="pickup-content">
-                    <div class="pickup-image">
-                        <img src="<?php echo $featuredNovels[0]['cover']; ?>" alt="<?php echo $featuredNovels[0]['title']; ?>">
-                    </div>
-                    <div class="pickup-detail">
-                        <h3><?php echo $featuredNovels[0]['title']; ?></h3>
-                        <p class="pickup-description">
-                            <?php echo $featuredNovels[0]['description']; ?>
-                        </p>
-                        <a href="detail-novel.php?id=<?php echo $featuredNovels[0]['id']; ?>" class="pickup-button">Baca Gratis</a>
-                    </div>
-                </div>
-                
-                <div class="feature-items">
-                    <?php foreach(array_slice($featuredNovels, 1) as $novel): ?>
-                    <div class="feature-card">
-                        <div class="feature-image">
-                            <img src="<?php echo $novel['cover']; ?>" alt="<?php echo $novel['title']; ?>">
-                        </div>
-                        <div class="feature-content">
-                            <h3><?php echo $novel['title']; ?></h3>
-                            <div>
-                                <span class="feature-price"><?php echo number_format($novel['price']); ?>¥</span>
-                                <span class="feature-old-price"><?php echo number_format($novel['oldPrice']); ?>¥</span>
-                                <span class="feature-discount"><?php echo $novel['discount']; ?>%OFF</span>
-                            </div>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-            </section>
-            
-            <!-- New Releases -->
-            <section class="feature-section">
-                <div class="feature-header">
-                    <h2 class="feature-title"><i class="fas fa-book"></i> Karya Terbaru</h2>
-                    <a href="list-novel.php?category=new" class="feature-more">Lihat Semua</a>
-                </div>
-                
-                <div class="novel-list">
-                    <?php foreach($newReleases as $novel): ?>
-                    <div class="novel-item">
-                        <div class="novel-cover">
-                            <img src="<?php echo $novel['cover']; ?>" alt="<?php echo $novel['title']; ?>">
-                        </div>
-                        <div class="novel-detail">
-                            <h3 class="novel-title">
-                                <?php echo $novel['title']; ?>
-                                <?php if(isset($novel['isNew']) && $novel['isNew']): ?>
-                                <span class="stamp-tag stamp-new">BARU</span>
-                                <?php endif; ?>
-                                <?php if(isset($novel['isHot']) && $novel['isHot']): ?>
-                                <span class="stamp-tag stamp-hot">HOT</span>
-                                <?php endif; ?>
-                            </h3>
-                            <p class="novel-author">Penulis: <?php echo $novel['author']; ?></p>
-                            <p class="novel-description"><?php echo $novel['description']; ?></p>
-                            <div class="novel-meta">
-                                <span><i class="far fa-eye"></i> <?php echo number_format($novel['views']); ?></span>
-                                <span><i class="far fa-heart"></i> <?php echo number_format($novel['likes']); ?></span>
-                                <span><i class="far fa-comment"></i> <?php echo number_format($novel['comments']); ?></span>
-                                <div class="novel-price"><?php echo number_format($novel['price']); ?>¥</div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-            </section>
-            
-            <!-- Kategori Populer -->
-            <section class="feature-section">
-                <div class="feature-header">
-                    <h2 class="feature-title"><i class="fas fa-list"></i> Kategori Populer</h2>
-                    <a href="list-novel.php" class="feature-more">Semua Kategori</a>
-                </div>
-                <div class="category-grid">
-                    <?php foreach($categories as $category): ?>
-                    <div class="category-box">
-                        <div class="category-image">
-                            <img src="<?php echo $category['image']; ?>" alt="<?php echo $category['name']; ?>">
-                        </div>
-                        <div class="category-box-content">
-                            <h3><?php echo $category['name']; ?></h3>
-                            <p class="category-box-price"><?php echo $category['count']; ?> novel</p>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-            </section>
+
+<!-- Main Content -->
+<div class="main-content">
+    <!-- Chapter Terbaru -->
+    <section class="feature-section">
+        <div class="feature-header">
+            <h2 class="feature-title"><i class="fas fa-bookmark"></i> Chapter Terbaru</h2>
+            <a href="list-novel.php?category=new" class="feature-more">Lihat Semua</a>
         </div>
         
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <!-- Login Box -->
-            <div class="sidebar-section">
-                <div class="sidebar-header">Area Member</div>
-                <div class="sidebar-content">
-                    <form action="login.php" method="post">
-                        <div style="margin-bottom: 10px;">
-                            <input type="text" name="username" placeholder="Username/Email" style="width: 100%; padding: 6px; font-size: 11px;">
-                        </div>
-                        <div style="margin-bottom: 10px;">
-                            <input type="password" name="password" placeholder="Password" style="width: 100%; padding: 6px; font-size: 11px;">
-                        </div>
-                        <div style="display: flex; margin-bottom: 10px;">
-                            <button type="submit" style="flex: 1; background: #ff6600; color: white; border: none; padding: 6px; font-size: 11px; cursor: pointer;">Login</button>
-                            <a href="register.php" style="flex: 1; background: #333; color: white; border: none; padding: 6px; font-size: 11px; text-align: center; margin-left: 5px; text-decoration: none;">Register</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div class="novel-list">
+            <?php
+            // Ambil daftar chapter terbaru dari semua novel tanpa memandang tipe
+            $latestChapters = [];
             
-            <!-- Ranking Box -->
-            <div class="sidebar-section">
-                <div class="sidebar-header">Peringkat Popularitas</div>
-                <div class="sidebar-content">
-                    <?php foreach($popularRankings as $index => $novel): ?>
-                    <div style="padding: 4px 0; border-bottom: 1px solid #eee;">
-                        <span style="display: inline-block; width: 16px; height: 16px; background-color: <?php echo $index < 3 ? ['#ff6600', '#ff9900', '#ffcc00'][$index] : '#999'; ?>; color: #fff; text-align: center; line-height: 16px; font-size: 10px; border-radius: 50%; margin-right: 4px;"><?php echo $index + 1; ?></span>
-                        <a href="detail-novel.php?id=<?php echo $novel['id']; ?>" style="font-size: 11px;"><?php echo $novel['title']; ?></a>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-            
-            <!-- Ad Banner -->
-            <div class="sidebar-section">
-                <div class="sidebar-content" style="padding: 0;">
-                    <img src="images/sidebar-ad.jpg" alt="Promo" style="width: 100%;">
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-container">
-            <div class="footer-links">
-                <a href="#">Tentang Kami</a>
-                <a href="#">Syarat dan Ketentuan</a>
-                <a href="#">Kebijakan Privasi</a>
-                <a href="#">Bantuan</a>
-                <a href="#">Kontak</a>
-            </div>
-            <div class="footer-copyright">
-                &copy; <?php echo date('Y'); ?> BagusNovel. All Rights Reserved.
-            </div>
-        </div>
-    </footer>
-    
-    <!-- Dark Mode Toggle -->
-    <button class="dark-mode-toggle" id="darkModeToggle">
-        <i class="fas fa-moon"></i>
-    </button>
-    
-    <script>
-        // Dark Mode Toggle Script
-        document.getElementById('darkModeToggle').addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-            const icon = this.querySelector('i');
-            if (document.body.classList.contains('dark-mode')) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-                localStorage.setItem('darkMode', 'disabled');
+            foreach($allNovels as $novel) {
+                if(isset($novel['chapters']) && !empty($novel['chapters'])) {
+                    // Urutkan chapter berdasarkan tanggal terbaru
+                    $chapters = $novel['chapters'];
+                    usort($chapters, function($a, $b) {
+                        return strtotime($b['date']) - strtotime($a['date']);
+                    });
+                    
+                    // Ambil chapter terbaru dari novel ini
+                    $latestChapter = $chapters[0];
+                    
+                    $latestChapters[] = [
+                        'novel_id' => $novel['id'],
+                        'novel_title' => $novel['title'],
+                        'novel_cover' => $novel['cover'],
+                        'novel_author' => $novel['author'],
+                        'novel_description' => $novel['description'],
+                        'novel_views' => $novel['views'],
+                        'novel_likes' => $novel['likes'],
+                        'novel_comments' => $novel['comments'],
+                        'novel_categories' => $novel['categories'] ?? [],
+                        'isProject' => $novel['isProject'] ?? false,
+                        'isMirror' => $novel['isMirror'] ?? false,
+                        'chapter_number' => $latestChapter['number'],
+                        'chapter_title' => $latestChapter['title'],
+                        'chapter_date' => $latestChapter['date'],
+                        'chapter_duration' => $latestChapter['duration'] ?? 10
+                    ];
+                }
             }
-        });
+            
+            // Urutkan berdasarkan tanggal chapter terbaru
+            usort($latestChapters, function($a, $b) {
+                return strtotime($b['chapter_date']) - strtotime($a['chapter_date']);
+            });
+            
+            // Ambil 2 chapter terbaru
+            $latestChapters = array_slice($latestChapters, 0, 2);
+            
+            foreach($latestChapters as $novel):
+            ?>
+            <div class="novel-item">
+                <div class="novel-cover">
+                    <img src="<?php echo $novel['novel_cover']; ?>" alt="<?php echo $novel['novel_title']; ?>">
+                    <?php if($novel['isMirror']): ?>
+                    <span class="novel-cover-tag tag-mirror">Mirror</span>
+                    <?php endif; ?>
+                    <?php if($novel['isProject']): ?>
+                    <span class="novel-cover-tag tag-project">Project</span>
+                    <?php endif; ?>
+                </div>
+                <div class="novel-detail">
+                    <h3 class="novel-title">
+                        <a href="detail-novel.php?id=<?php echo $novel['novel_id']; ?>"><?php echo $novel['novel_title']; ?></a>
+                    </h3>
+                    <p class="novel-author">Penulis: <?php echo $novel['novel_author']; ?></p>
+                    <p class="novel-description"><?php echo $novel['novel_description']; ?></p>
+                    <div class="novel-chapter-update">
+                        <a href="read.php?id=<?php echo $novel['novel_id']; ?>&chapter=<?php echo $novel['chapter_number']; ?>">
+                            <i class="fas fa-bookmark"></i> Chapter <?php echo $novel['chapter_number']; ?>: <?php echo $novel['chapter_title']; ?>
+                        </a>
+                        <span class="chapter-date"><i class="far fa-calendar"></i> <?php echo date('d M Y', strtotime($novel['chapter_date'])); ?></span>
+                    </div>
+                    <div class="novel-meta">
+                        <span><i class="far fa-eye"></i> <?php echo number_format($novel['novel_views']); ?></span>
+                        <span><i class="far fa-heart"></i> <?php echo number_format($novel['novel_likes']); ?></span>
+                        <span><i class="far fa-comment"></i> <?php echo number_format($novel['novel_comments']); ?></span>
+                        <?php if(!empty($novel['novel_categories'])): ?>
+                        <span><i class="fas fa-tags"></i> <?php echo implode(', ', array_slice($novel['novel_categories'], 0, 2)); ?></span>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+    
+    <!-- New Releases -->
+    <section class="feature-section">
+        <div class="feature-header">
+            <h2 class="feature-title"><i class="fas fa-book"></i> Novel Terbaru</h2>
+            <a href="list-novel.php?category=new" class="feature-more">Lihat Semua</a>
+        </div>
         
-        // Check for saved dark mode preference
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            document.body.classList.add('dark-mode');
-            document.querySelector('.dark-mode-toggle i').classList.remove('fa-moon');
-            document.querySelector('.dark-mode-toggle i').classList.add('fa-sun');
-        }
-    </script>
-</body>
-</html>
+        <div class="novel-list">
+            <?php foreach($newReleases as $novel): ?>
+            <div class="novel-item">
+                <div class="novel-cover">
+                    <img src="<?php echo $novel['cover']; ?>" alt="<?php echo $novel['title']; ?>">
+                    <?php if(isset($novel['isMirror']) && $novel['isMirror']): ?>
+                    <span class="novel-cover-tag tag-mirror">Mirror</span>
+                    <?php endif; ?>
+                    <?php if(isset($novel['isProject']) && $novel['isProject']): ?>
+                    <span class="novel-cover-tag tag-project">Project</span>
+                    <?php endif; ?>
+                </div>
+                <div class="novel-detail">
+                    <h3 class="novel-title">
+                        <?php echo $novel['title']; ?>
+                        <?php if(isset($novel['isNew']) && $novel['isNew']): ?>
+                        <span class="stamp-tag stamp-new">BARU</span>
+                        <?php endif; ?>
+                        <?php if(isset($novel['isHot']) && $novel['isHot']): ?>
+                        <span class="stamp-tag stamp-hot">HOT</span>
+                        <?php endif; ?>
+                    </h3>
+                    <p class="novel-author">Penulis: <?php echo $novel['author']; ?></p>
+                    <p class="novel-description"><?php echo $novel['description']; ?></p>
+                    <div class="novel-meta">
+                        <span><i class="far fa-eye"></i> <?php echo number_format($novel['views']); ?></span>
+                        <span><i class="far fa-heart"></i> <?php echo number_format($novel['likes']); ?></span>
+                        <span><i class="far fa-comment"></i> <?php echo number_format($novel['comments']); ?></span>
+                        <?php if(isset($novel['categories']) && !empty($novel['categories'])): ?>
+                        <span><i class="fas fa-tags"></i> <?php echo implode(', ', array_slice($novel['categories'], 0, 2)); ?></span>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+</div>
+
+<?php
+// Include sidebar
+require_once('includes/sidebar.php');
+
+// Include footer
+require_once('includes/footer.php'); 
+?>

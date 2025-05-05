@@ -28,6 +28,15 @@ yarn.lock
 .buildpath
 .settings/
 
+# Abaikan direktori dan file Cursor
+/.cursor/
+*.cursor-sql
+cursor.sql
+cursor.json
+.cursor-data/
+.cursor-assets/
+.cursor.config.json
+
 # Abaikan file cache
 *.log
 *.cache
@@ -40,6 +49,7 @@ yarn.lock
 *~
 *.bak
 *.orig
+/.backup/
 
 # Abaikan file upload
 /uploads/*
