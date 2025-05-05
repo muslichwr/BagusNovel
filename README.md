@@ -2,6 +2,8 @@
 
 Aplikasi web untuk platform membaca novel online dengan berbagai genre dan fitur.
 
+![Screenshot BagusNovel](utama.jpg)
+
 ## Fitur
 
 - Tampilan responsif dengan dark mode
@@ -15,6 +17,20 @@ Aplikasi web untuk platform membaca novel online dengan berbagai genre dan fitur
   - Pengurutan (terbaru, terpopuler, rating)
   - Tampilan grid dan list
   - Informasi kompak dan informatif
+
+## Screenshot
+
+### Halaman Utama
+![Halaman Utama](index.png)
+
+### Halaman List Novel
+![Halaman Utama](list_novel.png)
+
+### Halaman Detail Novel
+![Halaman Login](detail_novel.png)
+
+### Halaman Novel Tersimpan
+![Novel Tersimpan](saved_novel.png)
 
 ## Cara Penggunaan
 
