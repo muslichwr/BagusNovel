@@ -1,0 +1,371 @@
+/* Saved Novel Styles */
+:root {
+    --saved-accent-color: var(--color-button-bg);
+    --saved-accent-hover: var(--color-link-hover);
+    --saved-bg-light: var(--color-bg);
+    --saved-card-bg: var(--color-section-bg);
+    --saved-text-primary: var(--color-text);
+    --saved-text-secondary: var(--color-secondary-text);
+    --saved-border-color: var(--color-section-border);
+    --saved-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.dark-mode {
+    --saved-accent-color: var(--color-button-bg);
+    --saved-accent-hover: var(--color-link-hover);
+    --saved-bg-light: var(--color-bg);
+    --saved-card-bg: var(--color-section-bg);
+    --saved-text-primary: var(--color-text);
+    --saved-text-secondary: var(--color-secondary-text);
+    --saved-border-color: var(--color-section-border);
+    --saved-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Page container */
+.saved-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+}
+
+/* Header section */
+.saved-header {
+    background-color: var(--saved-accent-color);
+    color: var(--color-button-text);
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.saved-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.saved-stats {
+    font-size: 12px;
+}
+
+/* Controls and filters */
+.saved-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: var(--saved-card-bg);
+    border: 1px solid var(--saved-border-color);
+    border-radius: 3px;
+    padding: 8px 10px;
+}
+
+.saved-filter {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.saved-filter-select {
+    padding: 5px 8px;
+    border: 1px solid var(--saved-border-color);
+    border-radius: 3px;
+    background-color: var(--saved-card-bg);
+    color: var(--saved-text-primary);
+    font-size: 12px;
+}
+
+.saved-view-toggle {
+    display: flex;
+    gap: 3px;
+}
+
+.view-btn {
+    border: 1px solid var(--saved-border-color);
+    background-color: var(--saved-card-bg);
+    color: var(--saved-text-secondary);
+    border-radius: 3px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.view-btn.active {
+    background-color: var(--saved-accent-color);
+    color: var(--color-button-text);
+    border-color: var(--saved-accent-color);
+}
+
+/* Grid layout */
+.saved-novels-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* List layout */
+.saved-novels-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+/* Card styles */
+.saved-novel-card {
+    background-color: var(--saved-card-bg);
+    border: 1px solid var(--saved-border-color);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+.saved-novel-card:hover {
+    box-shadow: var(--saved-shadow);
+}
+
+/* Grid card */
+.grid-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-card .card-cover {
+    height: 150px;
+    position: relative;
+}
+
+.grid-card .card-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.grid-card .card-body {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.grid-card .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    line-height: 1.2;
+    color: var(--saved-text-primary);
+}
+
+.grid-card .card-author {
+    font-size: 11px;
+    color: var(--saved-text-secondary);
+    margin-bottom: 5px;
+}
+
+.grid-card .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    font-size: 10px;
+    color: var(--saved-text-secondary);
+}
+
+/* List card */
+.list-card {
+    display: flex;
+    padding: 8px;
+}
+
+.list-card .card-cover {
+    width: 60px;
+    height: 85px;
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+
+.list-card .card-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.list-card .card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.list-card .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    color: var(--saved-text-primary);
+}
+
+.list-card .card-author {
+    font-size: 12px;
+    color: var(--saved-text-secondary);
+    margin-bottom: 5px;
+}
+
+.list-card .card-progress {
+    margin-top: auto;
+}
+
+.list-card .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3px;
+    font-size: 11px;
+    color: var(--saved-text-secondary);
+}
+
+.list-card .card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+/* Progress bar */
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background-color: var(--saved-border-color);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--saved-accent-color);
+}
+
+/* Badge */
+.card-badge {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    padding: 2px 5px;
+    font-size: 9px;
+    border-radius: 2px;
+    font-weight: 600;
+    z-index: 1;
+}
+
+.badge-reading {
+    background-color: var(--saved-accent-color);
+    color: var(--color-button-text);
+}
+
+.badge-completed {
+    background-color: var(--color-badge-green-bg);
+    color: var(--color-badge-green-text);
+}
+
+.badge-plan {
+    background-color: var(--color-badge-orange-bg);
+    color: var(--color-badge-orange-text);
+}
+
+/* Action buttons */
+.action-btn {
+    background: none;
+    border: none;
+    color: var(--saved-text-secondary);
+    cursor: pointer;
+    font-size: 11px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.action-btn:hover {
+    color: var(--saved-accent-color);
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 25px 15px;
+    background-color: var(--saved-card-bg);
+    border: 1px dashed var(--saved-border-color);
+    border-radius: 3px;
+    margin: 15px 0;
+}
+
+.empty-state-icon {
+    font-size: 30px;
+    color: var(--saved-text-secondary);
+    margin-bottom: 10px;
+}
+
+.empty-state-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--saved-text-primary);
+}
+
+.empty-state-text {
+    font-size: 13px;
+    color: var(--saved-text-secondary);
+    margin-bottom: 15px;
+}
+
+.empty-state-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: var(--saved-accent-color);
+    color: var(--color-button-text);
+    border-radius: 3px;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.empty-state-btn:hover {
+    background-color: var(--saved-accent-hover);
+    text-decoration: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .saved-novels-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .saved-novels-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .saved-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .saved-filter {
+        width: 100%;
+    }
+    
+    .saved-filter-select {
+        flex-grow: 1;
+    }
+}
+
+@media (max-width: 380px) {
+    .saved-novels-grid {
+        grid-template-columns: 1fr;
+    }
+} 

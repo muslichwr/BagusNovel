@@ -16,8 +16,27 @@ require_once('includes/data.php');
 // Filter dan parameter
 $search = $_GET['search'] ?? '';
 $category = $_GET['category'] ?? '';
-$mirror = isset($_GET['mirror']) ? (bool)$_GET['mirror'] : false;
-$project = isset($_GET['project']) ? (bool)$_GET['project'] : false;
+
+// Handle novel_type parameter
+$novel_type = $_GET['novel_type'] ?? 'all';
+// Set mirror dan project berdasarkan novel_type jika ada
+if (isset($_GET['novel_type'])) {
+    if ($_GET['novel_type'] === 'mirror') {
+        $mirror = true;
+        $project = false;
+    } else if ($_GET['novel_type'] === 'project') {
+        $mirror = false;
+        $project = true;
+    } else if ($_GET['novel_type'] === 'all') {
+        $mirror = false;
+        $project = false;
+    }
+} else {
+    $mirror = isset($_GET['mirror']) ? (bool)$_GET['mirror'] : false;
+    $project = isset($_GET['project']) ? (bool)$_GET['project'] : false;
+}
+
+$status = $_GET['status'] ?? 'all';
 $sortBy = $_GET['sort'] ?? 'newest';
 $page = max(1, intval($_GET['page'] ?? 1));
 $perPage = 15;
@@ -70,6 +89,17 @@ if ($mirror) {
 if ($project) {
     $filteredNovels = array_filter($filteredNovels, function($novel) {
         return isset($novel['isProject']) && $novel['isProject'] === true;
+    });
+}
+
+// Filter berdasarkan status
+if ($status === 'completed') {
+    $filteredNovels = array_filter($filteredNovels, function($novel) {
+        return isset($novel['status']) && strtolower($novel['status']) === 'selesai';
+    });
+} elseif ($status === 'ongoing') {
+    $filteredNovels = array_filter($filteredNovels, function($novel) {
+        return isset($novel['status']) && strtolower($novel['status']) === 'berlangsung';
     });
 }
 
@@ -172,36 +202,33 @@ require_once('includes/header.php');
                     <label class="filter-label">Jenis Novel:</label>
                     <div class="filter-options-group">
                         <label class="filter-option">
-                            <input type="radio" name="novel_type" value="all" <?php if (!$mirror && !$project) echo 'checked'; ?> onchange="this.form.submit()">
+                            <input type="radio" name="novel_type" value="all" <?php if ($novel_type === 'all') echo 'checked'; ?>>
                             Semua
                         </label>
                         <label class="filter-option">
-                            <input type="radio" name="novel_type" value="mirror" <?php if ($mirror) echo 'checked'; ?> onchange="this.form.mirror.value=1; this.form.project.value=0; this.form.submit()">
-                            Mirror
+                            <input type="radio" name="novel_type" value="project" <?php if ($novel_type === 'project') echo 'checked'; ?>>
+                            Project
                         </label>
                         <label class="filter-option">
-                            <input type="radio" name="novel_type" value="project" <?php if ($project) echo 'checked'; ?> onchange="this.form.project.value=1; this.form.mirror.value=0; this.form.submit()">
-                            Project
+                            <input type="radio" name="novel_type" value="mirror" <?php if ($novel_type === 'mirror') echo 'checked'; ?>>
+                            Mirror
                         </label>
                     </div>
                 </div>
-                
-                <input type="hidden" name="mirror" value="<?php echo $mirror ? '1' : '0'; ?>">
-                <input type="hidden" name="project" value="<?php echo $project ? '1' : '0'; ?>">
                 
                 <div class="filter-group">
                     <label class="filter-label">Status:</label>
                     <div class="filter-options-group">
                         <label class="filter-option">
-                            <input type="radio" name="status" value="all" checked onchange="this.form.submit()">
+                            <input type="radio" name="status" value="all" <?php if ($status === 'all') echo 'checked'; ?>>
                             Semua
                         </label>
                         <label class="filter-option">
-                            <input type="radio" name="status" value="completed" onchange="this.form.submit()">
+                            <input type="radio" name="status" value="completed" <?php if ($status === 'completed') echo 'checked'; ?>>
                             Selesai
                         </label>
                         <label class="filter-option">
-                            <input type="radio" name="status" value="ongoing" onchange="this.form.submit()">
+                            <input type="radio" name="status" value="ongoing" <?php if ($status === 'ongoing') echo 'checked'; ?>>
                             Berlangsung
                         </label>
                     </div>

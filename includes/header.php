@@ -124,8 +124,8 @@
                     </a>
                     <div class="user-dropdown-menu" id="userDropdownMenu">
                         <div class="dropdown-header">Menu Pengguna</div>
+                        <a href="saved_novel.php" class="dropdown-item"><i class="fas fa-bookmark"></i> Novel Tersimpan</a>
                         <a href="register.php" class="dropdown-item"><i class="fas fa-book-reader"></i> Rekomendasi Novel</a>
-                        <a href="register.php" class="dropdown-item"><i class="fas fa-bookmark"></i> Daftar Bacaan</a>
                         <div class="dropdown-divider"></div>
                         <a href="login.php" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Login</a>
                         <a href="register.php" class="dropdown-item highlight"><i class="fas fa-user-plus"></i> Daftar</a>

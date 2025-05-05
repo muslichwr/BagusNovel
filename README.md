@@ -8,7 +8,13 @@ Aplikasi web untuk platform membaca novel online dengan berbagai genre dan fitur
 - Daftar novel berdasarkan kategori
 - Halaman detail novel dengan deskripsi, bab, dan ulasan
 - Sistem pencarian novel
-- Area member untuk pengguna
+- Halaman login dengan fitur "Remember Me" dan "Lupa Password"
+- Halaman registrasi untuk pendaftaran pengguna baru
+- Halaman novel tersimpan dengan fitur:
+  - Filter berdasarkan kategori/genre
+  - Pengurutan (terbaru, terpopuler, rating)
+  - Tampilan grid dan list
+  - Informasi kompak dan informatif
 
 ## Cara Penggunaan
 
@@ -21,8 +27,9 @@ Aplikasi web untuk platform membaca novel online dengan berbagai genre dan fitur
 - `index.php` - Halaman utama
 - `detail-novel.php` - Halaman detail novel
 - `list-novel.php` - Halaman daftar novel
-- `login.php` - Halaman login
-- `register.php` - Halaman pendaftaran
+- `login.php` - Halaman login dengan fitur khusus
+- `register.php` - Halaman pendaftaran pengguna
+- `saved_novel.php` - Halaman daftar novel tersimpan
 
 ## Kontribusi
 

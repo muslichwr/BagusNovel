@@ -29,6 +29,7 @@ if (!$novel) {
 $pageTitle = "BagusNovel | " . $novel['title'];
 
 // Atur opsi sidebar
+$showSidebar = true;
 $showSavedNovels = false;
 $showReadingHistory = true;
 $showCategories = false;
@@ -66,7 +67,7 @@ require_once('includes/header.php');
                     <?php foreach($novel['categories'] as $category): ?>
                     <span style="display: inline-block; background-color: #4d7eb7; color: #fff; padding: 2px 4px; font-size: 10px; border-radius: 2px; margin-right: 5px;"><?php echo $category; ?></span>
                     <?php endforeach; ?>
-                    <span style="display: inline-block; background-color: #e9c46a; color: #fff; padding: 2px 4px; font-size: 10px; border-radius: 2px;"><?php echo $novel['status']; ?></span>
+                    <span style="display: inline-block; background-color: #2a9d8f; color: #fff; padding: 2px 4px; font-size: 10px; border-radius: 2px;"><?php echo $novel['status']; ?></span>
                 </div>
                 <p style="font-size: 11px; margin-bottom: 5px;"><strong>Penulis:</strong> <?php echo $novel['author']; ?></p>
                 <p style="font-size: 11px; margin-bottom: 5px;"><strong>Tanggal Publikasi:</strong> <?php echo $novel['publishDate']; ?></p>
@@ -89,59 +90,23 @@ require_once('includes/header.php');
     <div class="pickup-item">
         <h2 class="pickup-title">Daftar Bab</h2>
         <div style="padding: 10px;">
-            <?php 
-            // Mendapatkan 10 chapter terbaru
-            $latestChapters = array_slice(array_reverse($novel['chapters']), 0, 10);
+            <?php
+            // Mengurutkan chapter dari nomor besar ke kecil (terbaru dahulu)
+            $sortedChapters = $novel['chapters'];
+            usort($sortedChapters, function($a, $b) {
+                return $b['number'] - $a['number']; // Urutkan dari besar ke kecil
+            });
             ?>
             
-            <!-- Chapter Terbaru -->
-            <div class="latest-chapters">
-                <h3 style="font-size: 14px; margin-bottom: 10px;">10 Chapter Terbaru</h3>
-                <?php foreach ($latestChapters as $chapter): ?>
+            <!-- Daftar Semua Chapter -->
+            <div class="all-chapters">
+                <?php foreach ($sortedChapters as $chapter): ?>
                 <div style="border-bottom: 1px solid #eee; padding: 6px 0;">
                     <a href="read.php?id=<?php echo $novel['id']; ?>&chapter=<?php echo $chapter['number']; ?>" style="font-size: 11px; font-weight: 700; text-decoration: none; color: var(--color-link);">Bab <?php echo $chapter['number']; ?>: <?php echo $chapter['title']; ?></a>
                     <p style="font-size: 10px; color: #666; margin-top: 2px;">Diterbitkan <?php echo $chapter['date']; ?> · Waktu baca sekitar <?php echo $chapter['duration']; ?> menit</p>
                 </div>
                 <?php endforeach; ?>
             </div>
-            
-            <?php if (count($novel['chapters']) > 10): ?>
-            <!-- Tombol Tampilkan Semua Chapter -->
-            <div style="text-align: center; margin: 15px 0;">
-                <button id="toggleOlderChapters" style="background-color: #f0f0f0; border: 1px solid #ddd; padding: 5px 15px; font-size: 12px; cursor: pointer; border-radius: 3px;">Lihat Semua Chapter</button>
-            </div>
-            
-            <!-- Chapter Lama (Awalnya Tersembunyi) -->
-            <div id="olderChapters" style="display: none;">
-                <h3 style="font-size: 14px; margin: 15px 0 10px;">Chapter Sebelumnya</h3>
-                <?php 
-                // Ambil chapter lama (kecuali 10 terbaru)
-                $olderChapters = array_slice($novel['chapters'], 0, count($novel['chapters']) - 10);
-                ?>
-                
-                <?php foreach ($olderChapters as $chapter): ?>
-                <div style="border-bottom: 1px solid #eee; padding: 6px 0;">
-                    <a href="read.php?id=<?php echo $novel['id']; ?>&chapter=<?php echo $chapter['number']; ?>" style="font-size: 11px; font-weight: 700; text-decoration: none; color: var(--color-link);">Bab <?php echo $chapter['number']; ?>: <?php echo $chapter['title']; ?></a>
-                    <p style="font-size: 10px; color: #666; margin-top: 2px;">Diterbitkan <?php echo $chapter['date']; ?> · Waktu baca sekitar <?php echo $chapter['duration']; ?> menit</p>
-                </div>
-                <?php endforeach; ?>
-            </div>
-            
-            <script>
-                document.getElementById('toggleOlderChapters').addEventListener('click', function() {
-                    var olderChapters = document.getElementById('olderChapters');
-                    var toggleButton = document.getElementById('toggleOlderChapters');
-                    
-                    if (olderChapters.style.display === 'none') {
-                        olderChapters.style.display = 'block';
-                        toggleButton.textContent = 'Sembunyikan Chapter Lama';
-                    } else {
-                        olderChapters.style.display = 'none';
-                        toggleButton.textContent = 'Lihat Semua Chapter';
-                    }
-                });
-            </script>
-            <?php endif; ?>
         </div>
     </div>
     <?php endif; ?>
@@ -172,87 +137,10 @@ require_once('includes/header.php');
         </div>
     </div>
     <?php endif; ?>
-    
-    <!-- Novel Terkait -->
-    <div class="pickup-item">
-        <h2 class="pickup-title">Mungkin Anda Juga Suka</h2>
-        <div style="padding: 10px; display: flex; flex-wrap: wrap;">
-            <?php 
-            // Ambil novel terkait berdasarkan kategori yang sama
-            $relatedNovels = [];
-            if (isset($novel['category'])) {
-                $relatedNovels = getNovelsByCategory($novel['category'], 3);
-                // Filter novel saat ini dari hasil
-                $relatedNovels = array_filter($relatedNovels, function($item) use ($novel) {
-                    return $item['id'] != $novel['id'];
-                });
-            }
-            
-            // Jika tidak ada novel terkait, tampilkan novel populer
-            if (count($relatedNovels) < 2) {
-                $relatedNovels = array_slice($featuredNovels, 0, 3);
-                // Filter novel saat ini dari hasil
-                $relatedNovels = array_filter($relatedNovels, function($item) use ($novel) {
-                    return $item['id'] != $novel['id'];
-                });
-            }
-            
-            // Tampilkan maksimal 3 novel terkait
-            $relatedNovels = array_slice($relatedNovels, 0, 3);
-            ?>
-            
-            <?php foreach($relatedNovels as $relatedNovel): ?>
-            <div style="width: 33.33%; padding: 5px;">
-                <div style="border: 1px solid #eee; padding: 5px;">
-                    <div style="margin-bottom: 5px; position: relative;">
-                        <img src="<?php echo $relatedNovel['cover']; ?>" alt="<?php echo $relatedNovel['title']; ?>" style="width: 100%;">
-                        <?php if(isset($relatedNovel['isMirror']) && $relatedNovel['isMirror']): ?>
-                        <span class="novel-cover-tag tag-mirror">Mirror</span>
-                        <?php endif; ?>
-                        <?php if(isset($relatedNovel['isProject']) && $relatedNovel['isProject']): ?>
-                        <span class="novel-cover-tag tag-project">Project</span>
-                        <?php endif; ?>
-                    </div>
-                    <a href="detail-novel.php?id=<?php echo $relatedNovel['id']; ?>" style="font-size: 11px; font-weight: 700; text-decoration: none; color: var(--color-link); display: block; margin-bottom: 3px;"><?php echo $relatedNovel['title']; ?></a>
-                    <p style="font-size: 10px; color: #666; margin-bottom: 3px;"><?php echo $relatedNovel['author']; ?></p>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
 </div>
 
 <!-- Sidebar Novel Info Box -->
-<div class="sidebar">
-    <!-- Novel Info Box -->
-    <div class="sidebar-section">
-        <div class="sidebar-header">Informasi Novel</div>
-        <div class="sidebar-content">
-            <div style="font-size: 11px; margin-bottom: 5px;">
-                <span style="display: inline-block; width: 70px; color: #666;">Penulis</span>
-                <span>: <?php echo $novel['author']; ?></span>
-            </div>
-            <div style="font-size: 11px; margin-bottom: 5px;">
-                <span style="display: inline-block; width: 70px; color: #666;">Publikasi</span>
-                <span>: <?php echo $novel['publishDate']; ?></span>
-            </div>
-            <div style="font-size: 11px; margin-bottom: 5px;">
-                <span style="display: inline-block; width: 70px; color: #666;">Status</span>
-                <span>: <?php echo $novel['status']; ?></span>
-            </div>
-            <div style="font-size: 11px; margin-bottom: 5px;">
-                <span style="display: inline-block; width: 70px; color: #666;">Halaman</span>
-                <span>: <?php echo $novel['pages']; ?></span>
-            </div>
-            <div style="font-size: 11px; margin-bottom: 5px;">
-                <span style="display: inline-block; width: 70px; color: #666;">Genre</span>
-                <span>: <?php echo implode(', ', $novel['categories']); ?></span>
-            </div>
-        </div>
-    </div>
-    
     <?php require_once('includes/sidebar.php'); ?>
-</div>
 
 <?php 
 // Include footer

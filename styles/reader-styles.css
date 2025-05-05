@@ -1,0 +1,190 @@
+/* Reader Styles - Styling untuk halaman baca novel */
+
+/* Container utama */
+.reader-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--color-section-bg);
+    border: 1px solid var(--color-section-border);
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Header pembaca */
+.reader-header {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--color-section-border);
+    background-color: var(--color-section-bg);
+}
+
+.novel-title-small {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--color-text);
+}
+
+.novel-title-small a {
+    color: #4d7eb7;
+    text-decoration: none;
+}
+
+.novel-title-small a:hover {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+}
+
+.chapter-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--color-text);
+}
+
+.chapter-meta {
+    font-size: 11px;
+    color: var(--color-secondary-text);
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.chapter-meta span {
+    margin-right: 15px;
+}
+
+/* Panel opsi */
+.reader-options {
+    padding: 8px 15px;
+    background-color: var(--color-tab-bg);
+    border-bottom: 1px solid var(--color-section-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.text-options {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.text-options button {
+    background: none;
+    border: 1px solid var(--color-input-border);
+    border-radius: 3px;
+    padding: 3px 8px;
+    margin-right: 5px;
+    font-size: 11px;
+    cursor: pointer;
+    color: var(--color-text);
+    transition: background-color 0.2s;
+}
+
+.text-options button:hover {
+    background-color: var(--color-subtle-bg);
+}
+
+/* Konten pembaca */
+.reader-content {
+    padding: 25px 30px;
+    line-height: 1.8;
+    font-size: 16px;
+    background-color: var(--color-section-bg);
+    color: var(--color-text);
+}
+
+/* Font untuk konten novel */
+.reader-content p {
+    margin-bottom: 1.2em;
+    text-indent: 1.5em;
+    font-family: 'Noto Serif JP', serif;
+}
+
+/* Navigasi */
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: var(--color-tab-bg);
+    border-top: 1px solid var(--color-section-border);
+}
+
+.nav-button {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: var(--color-button-bg);
+    color: var(--color-button-text);
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 12px;
+    transition: background-color 0.2s;
+}
+
+.nav-button:hover {
+    background-color: #e55c00;
+    text-decoration: none;
+    color: var(--color-button-text);
+}
+
+.nav-button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.nav-center {
+    display: flex;
+    align-items: center;
+}
+
+.chapter-selector {
+    padding: 6px 10px;
+    border: 1px solid var(--color-input-border);
+    border-radius: 3px;
+    font-size: 12px;
+    background-color: var(--color-input-bg);
+    color: var(--color-input-text);
+}
+
+/* Media query untuk responsif */
+@media screen and (max-width: 768px) {
+    .reader-container {
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+    
+    .reader-content {
+        padding: 15px;
+    }
+    
+    .navigation {
+        flex-wrap: wrap;
+    }
+    
+    .nav-button {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+    
+    .nav-center {
+        order: -1;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .chapter-selector {
+        width: 100%;
+    }
+}
+
+/* Polishing untuk kontras yang lebih baik */
+.reader-content p:first-of-type::first-letter {
+    font-size: 1.5em;
+    font-weight: 500;
+    color: #4d7eb7;
+} 

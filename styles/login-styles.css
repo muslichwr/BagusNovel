@@ -1,0 +1,177 @@
+/* Login Styles - Minimalis */
+.login-container {
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: var(--color-section-bg);
+    border: 1px solid var(--color-section-border);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.login-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--color-text);
+    text-align: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: var(--color-text);
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"] {
+    width: 100% !important;
+    padding: 8px 10px !important;
+    border: 1px solid var(--color-input-border) !important;
+    border-radius: 3px !important;
+    font-size: 13px !important;
+    background-color: var(--color-input-bg) !important;
+    color: var(--color-input-text) !important;
+}
+
+.password-input-wrapper {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--color-secondary-text);
+    cursor: pointer;
+    padding: 0;
+    font-size: 14px;
+}
+
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.forgot-password {
+    color: var(--color-button-bg);
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.login-button {
+    background-color: var(--color-button-bg);
+    color: var(--color-button-text);
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.login-button:hover {
+    background-color: var(--color-link-hover);
+}
+
+.alert {
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.alert-error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+}
+
+.alert-success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+}
+
+/* Terms Checkbox */
+.terms-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+}
+
+.terms-checkbox input[type="checkbox"] {
+    width: auto;
+}
+
+.terms-link {
+    color: var(--color-button-bg);
+    text-decoration: none;
+}
+
+.terms-link:hover {
+    text-decoration: underline;
+}
+
+/* Lupa Password */
+.reset-instructions {
+    font-size: 13px;
+    color: var(--color-secondary-text);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.back-to-login {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.back-to-login a {
+    color: var(--color-button-bg);
+    text-decoration: none;
+}
+
+.back-to-login a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-container {
+        max-width: 100%;
+        margin: 15px;
+        padding: 20px;
+    }
+} 

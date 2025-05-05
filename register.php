@@ -4,7 +4,7 @@
  */
 
 // Informasi halaman
-$pageTitle = "BagusNovel | Daftar Akun Baru";
+$pageTitle = "BagusNovel | Register";
 $currentPage = "register";
 
 // Include file konfigurasi
@@ -22,17 +22,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Validasi input
     if (empty($username) || empty($email) || empty($password) || empty($password_confirm)) {
-        $error = "Semua kolom harus diisi";
+        $error = "Semua bidang harus diisi";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = "Format email tidak valid";
-    } elseif (strlen($password) < 6) {
-        $error = "Password harus minimal 6 karakter";
     } elseif ($password !== $password_confirm) {
         $error = "Konfirmasi password tidak cocok";
+    } elseif (strlen($password) < 6) {
+        $error = "Password harus minimal 6 karakter";
     } else {
-        // Pada implementasi nyata, simpan ke database
-        // Untuk demo, anggap registrasi berhasil
-        $success = "Pendaftaran berhasil! Silakan cek email Anda untuk verifikasi.";
+        // Pada implementasi nyata, tambahkan user ke database
+        // Untuk demo, kita anggap registrasi berhasil
+        $success = "Registrasi berhasil! Silakan login dengan akun baru Anda.";
+        // Commented out for demo: header('Location: login.php');
     }
 }
 
@@ -41,9 +42,9 @@ require_once('includes/header.php');
 ?>
 
 <!-- Main Content -->
-<div class="main-content">
-    <div class="register-container">
-        <h1 class="register-title">Daftar Akun Baru</h1>
+<div class="main-content" style="margin: 0 auto; float: none;">
+    <div class="login-container">
+        <h1 class="login-title">Daftar Akun Baru</h1>
         
         <?php if (!empty($error)): ?>
         <div class="alert alert-error">
@@ -57,34 +58,31 @@ require_once('includes/header.php');
         </div>
         <?php endif; ?>
         
-        <form action="register.php" method="post" class="register-form">
+        <form action="register.php" method="post" class="login-form">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Pilih username" required>
-                <p class="form-hint">Username akan ditampilkan di profil Anda</p>
+                <input type="text" id="username" name="username" placeholder="Masukkan username" required>
             </div>
             
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Masukkan email" required>
-                <p class="form-hint">Kami akan mengirimkan link verifikasi ke alamat email ini</p>
+                <input type="email" id="email" name="email" placeholder="Masukkan email" required style="width: 100%; padding: 8px 10px; border: 1px solid var(--color-input-border); border-radius: 3px; font-size: 13px; background-color: var(--color-input-bg); color: var(--color-input-text);">
             </div>
             
             <div class="form-group">
                 <label for="password">Password</label>
                 <div class="password-input-wrapper">
-                    <input type="password" id="password" name="password" placeholder="Buat password" required>
+                    <input type="password" id="password" name="password" placeholder="Masukkan password" required>
                     <button type="button" class="password-toggle" onclick="togglePasswordVisibility('password')">
                         <i class="far fa-eye"></i>
                     </button>
                 </div>
-                <p class="form-hint">Minimal 6 karakter dengan kombinasi huruf dan angka</p>
             </div>
             
             <div class="form-group">
                 <label for="password_confirm">Konfirmasi Password</label>
                 <div class="password-input-wrapper">
-                    <input type="password" id="password_confirm" name="password_confirm" placeholder="Ulangi password" required>
+                    <input type="password" id="password_confirm" name="password_confirm" placeholder="Konfirmasi password" required>
                     <button type="button" class="password-toggle" onclick="togglePasswordVisibility('password_confirm')">
                         <i class="far fa-eye"></i>
                     </button>
@@ -93,94 +91,24 @@ require_once('includes/header.php');
             
             <div class="form-group terms-checkbox">
                 <input type="checkbox" id="terms" name="terms" required>
-                <label for="terms">Saya menyetujui <a href="#">Syarat dan Ketentuan</a> serta <a href="#">Kebijakan Privasi</a> BagusNovel</label>
+                <label for="terms">Saya menyetujui <a href="#" class="terms-link">Syarat & Ketentuan</a></label>
             </div>
             
             <div class="form-group">
-                <button type="submit" class="register-button">Daftar Sekarang</button>
+                <button type="submit" class="login-button">Daftar</button>
             </div>
             
-            <div class="login-divider">
-                <span>atau daftar dengan</span>
-            </div>
-            
-            <div class="social-login">
-                <button type="button" class="social-button google">
-                    <i class="fab fa-google"></i> Google
-                </button>
-                <button type="button" class="social-button facebook">
-                    <i class="fab fa-facebook-f"></i> Facebook
-                </button>
-            </div>
-            
-            <div class="login-link">
-                Sudah punya akun? <a href="login.php">Login di sini</a>
+            <div class="back-to-login">
+                Sudah punya akun? <a href="login.php">Login sekarang</a>
             </div>
         </form>
-    </div>
-</div>
-
-<!-- Sidebar -->
-<div class="sidebar">
-    <!-- Features Box -->
-    <div class="sidebar-section">
-        <div class="sidebar-header">Fitur BagusNovel</div>
-        <div class="sidebar-content">
-            <div class="feature-item">
-                <i class="fas fa-book"></i>
-                <div>
-                    <h3>Perpustakaan Lengkap</h3>
-                    <p>Ribuan novel dari berbagai genre untuk Anda nikmati</p>
-                </div>
-            </div>
-            <div class="feature-item">
-                <i class="fas fa-mobile-alt"></i>
-                <div>
-                    <h3>Baca di Mana Saja</h3>
-                    <p>Platform responsif untuk semua perangkat</p>
-                </div>
-            </div>
-            <div class="feature-item">
-                <i class="fas fa-bookmark"></i>
-                <div>
-                    <h3>Bookmark & Lanjutkan</h3>
-                    <p>Simpan progres membaca dan lanjutkan kapan saja</p>
-                </div>
-            </div>
-            <div class="feature-item">
-                <i class="fas fa-bell"></i>
-                <div>
-                    <h3>Notifikasi Update</h3>
-                    <p>Dapatkan pemberitahuan saat novel favorit diperbarui</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Testimonial Box -->
-    <div class="sidebar-section">
-        <div class="sidebar-header">Testimoni Pembaca</div>
-        <div class="sidebar-content">
-            <div class="testimonial">
-                <div class="testimonial-content">
-                    <p>"BagusNovel adalah platform terbaik untuk membaca novel online. Koleksinya lengkap dan mudah digunakan!"</p>
-                </div>
-                <div class="testimonial-author">
-                    <img src="images/user1.jpg" alt="User">
-                    <div>
-                        <p class="author-name">Budi Santoso</p>
-                        <p class="author-title">Pembaca Aktif</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
 <script>
     function togglePasswordVisibility(inputId) {
         const passwordInput = document.getElementById(inputId);
-        const icon = document.querySelector('#' + inputId + ' + .password-toggle i');
+        const icon = document.querySelector(`button[onclick="togglePasswordVisibility('${inputId}')"] i`);
         
         if (passwordInput.type === 'password') {
             passwordInput.type = 'text';
@@ -197,4 +125,4 @@ require_once('includes/header.php');
 <?php 
 // Include footer
 require_once('includes/footer.php'); 
-?> 
+?>

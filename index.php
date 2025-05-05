@@ -113,51 +113,6 @@ require_once('includes/header.php');
             <?php endforeach; ?>
         </div>
     </section>
-    
-    <!-- New Releases -->
-    <section class="feature-section">
-        <div class="feature-header">
-            <h2 class="feature-title"><i class="fas fa-book"></i> Novel Terbaru</h2>
-            <a href="list-novel.php?category=new" class="feature-more">Lihat Semua</a>
-        </div>
-        
-        <div class="novel-list">
-            <?php foreach($newReleases as $novel): ?>
-            <div class="novel-item">
-                <div class="novel-cover">
-                    <img src="<?php echo $novel['cover']; ?>" alt="<?php echo $novel['title']; ?>">
-                    <?php if(isset($novel['isMirror']) && $novel['isMirror']): ?>
-                    <span class="novel-cover-tag tag-mirror">Mirror</span>
-                    <?php endif; ?>
-                    <?php if(isset($novel['isProject']) && $novel['isProject']): ?>
-                    <span class="novel-cover-tag tag-project">Project</span>
-                    <?php endif; ?>
-                </div>
-                <div class="novel-detail">
-                    <h3 class="novel-title">
-                        <?php echo $novel['title']; ?>
-                        <?php if(isset($novel['isNew']) && $novel['isNew']): ?>
-                        <span class="stamp-tag stamp-new">BARU</span>
-                        <?php endif; ?>
-                        <?php if(isset($novel['isHot']) && $novel['isHot']): ?>
-                        <span class="stamp-tag stamp-hot">HOT</span>
-                        <?php endif; ?>
-                    </h3>
-                    <p class="novel-author">Penulis: <?php echo $novel['author']; ?></p>
-                    <p class="novel-description"><?php echo $novel['description']; ?></p>
-                    <div class="novel-meta">
-                        <span><i class="far fa-eye"></i> <?php echo number_format($novel['views']); ?></span>
-                        <span><i class="far fa-heart"></i> <?php echo number_format($novel['likes']); ?></span>
-                        <span><i class="far fa-comment"></i> <?php echo number_format($novel['comments']); ?></span>
-                        <?php if(isset($novel['categories']) && !empty($novel['categories'])): ?>
-                        <span><i class="fas fa-tags"></i> <?php echo implode(', ', array_slice($novel['categories'], 0, 2)); ?></span>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-    </section>
 </div>
 
 <?php

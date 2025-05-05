@@ -17,6 +17,7 @@ $success = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
+    $remember = isset($_POST['remember']) ? true : false;
     
     // Validasi input
     if (empty($username) || empty($password)) {
@@ -27,6 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // - username: demo
         // - password: demo123
         if ($username === 'demo' && $password === 'demo123') {
+            // Set cookie jika "ingat saya" dicentang
+            if ($remember) {
+                setcookie("user_login", $username, time() + (86400 * 30), "/"); // Cookie berlaku 30 hari
+            }
+            
             $success = "Login berhasil! Anda akan dialihkan ke halaman utama.";
             // Redirect ke halaman utama setelah berhasil login
             // Commented out for demo: header('Location: index.php');
@@ -41,7 +47,7 @@ require_once('includes/header.php');
 ?>
 
 <!-- Main Content -->
-<div class="main-content">
+<div class="main-content" style="margin: 0 auto; float: none;">
     <div class="login-container">
         <h1 class="login-title">Login ke Akun Anda</h1>
         
@@ -59,8 +65,8 @@ require_once('includes/header.php');
         
         <form action="login.php" method="post" class="login-form">
             <div class="form-group">
-                <label for="username">Username atau Email</label>
-                <input type="text" id="username" name="username" placeholder="Masukkan username atau email" required>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Masukkan username" required>
             </div>
             
             <div class="form-group">
@@ -78,66 +84,17 @@ require_once('includes/header.php');
                     <input type="checkbox" id="remember" name="remember">
                     <label for="remember">Ingat saya</label>
                 </div>
-                <a href="#" class="forgot-password">Lupa password?</a>
+                <a href="forgot-password.php" class="forgot-password">Lupa password?</a>
             </div>
             
             <div class="form-group">
                 <button type="submit" class="login-button">Login</button>
             </div>
             
-            <div class="login-divider">
-                <span>atau masuk dengan</span>
-            </div>
-            
-            <div class="social-login">
-                <button type="button" class="social-button google">
-                    <i class="fab fa-google"></i> Google
-                </button>
-                <button type="button" class="social-button facebook">
-                    <i class="fab fa-facebook-f"></i> Facebook
-                </button>
-            </div>
-            
-            <div class="register-link">
+            <div class="back-to-login">
                 Belum punya akun? <a href="register.php">Daftar sekarang</a>
             </div>
         </form>
-    </div>
-</div>
-
-<!-- Sidebar -->
-<div class="sidebar">
-    <!-- Login Benefits -->
-    <div class="sidebar-section">
-        <div class="sidebar-header">Keuntungan Member</div>
-        <div class="sidebar-content">
-            <ul class="benefit-list">
-                <li><i class="fas fa-check"></i> Akses ke semua novel premium</li>
-                <li><i class="fas fa-check"></i> Bookmark novel favorit</li>
-                <li><i class="fas fa-check"></i> Sinkronisasi progres membaca</li>
-                <li><i class="fas fa-check"></i> Notifikasi update novel terbaru</li>
-                <li><i class="fas fa-check"></i> Bebas iklan</li>
-            </ul>
-        </div>
-    </div>
-    
-    <!-- FAQ Box -->
-    <div class="sidebar-section">
-        <div class="sidebar-header">Pertanyaan Umum</div>
-        <div class="sidebar-content">
-            <div class="faq-item">
-                <div class="faq-question">Bagaimana cara mendaftar?</div>
-                <div class="faq-answer">Klik link "Daftar sekarang" atau kunjungi halaman Register untuk membuat akun baru.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Saya lupa password, apa yang harus dilakukan?</div>
-                <div class="faq-answer">Klik link "Lupa password?" di halaman login dan ikuti instruksi selanjutnya.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Apakah saya harus membayar untuk membaca?</div>
-                <div class="faq-answer">Kami memiliki novel gratis dan premium. Novel premium memerlukan pembayaran.</div>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -161,4 +118,4 @@ require_once('includes/header.php');
 <?php 
 // Include footer
 require_once('includes/footer.php'); 
-?> 
+?>
